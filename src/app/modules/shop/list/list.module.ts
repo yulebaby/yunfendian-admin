@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule , DatePipe } from '@angular/common';
-
-import { ClassComponent } from './class.component';
+import { ListComponent } from './list.component';
+import { RouterModule } from '@angular/router';
 import { NgRelaxModule } from 'src/app/ng-relax/ng-relax.module';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { RouterModule } from '@angular/router';
-import { CustomerPreviewModule } from '../../public/customer-preview/customer-preview.module';
+import { ShopModule } from '../shop.module';
+import { UpdateComponent } from './update/update.component';
+
+
+
 @NgModule({
-  declarations: [ClassComponent],
+  declarations: [UpdateComponent, ListComponent],
   imports: [
     CommonModule,
     NgRelaxModule,
     NgZorroAntdModule,
+    ShopModule,
     RouterModule.forChild([{
       path: '',
-      component: ClassComponent
+      component: ListComponent
     }]),
-    CustomerPreviewModule,
   ],
+  entryComponents: [UpdateComponent],
   providers: [ DatePipe ]
 })
-export class ClassModule { }
+export class ListModule { }

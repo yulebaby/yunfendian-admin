@@ -38,9 +38,9 @@ export class QueryComponent implements OnInit {
   isCollapse: boolean = true;
 
   constructor(
-    private http     : HttpClient,
-    private datePipe : DatePipe,
-    private cache    : CacheService,
+    private http: HttpClient,
+    private datePipe: DatePipe,
+    private cache: CacheService,
     private httpservice: HttpService,
     private store: Store<AppState>
   ) {
@@ -48,7 +48,7 @@ export class QueryComponent implements OnInit {
 
   storeId: number;
   ngOnInit() {
-   
+
     this.store.select('userInfoState').subscribe(userInfo => this.storeId = userInfo.kindergartenId);
     this._queryForm = new FormGroup({});
     this.node.map((res: any, idx) => {
@@ -85,7 +85,7 @@ export class QueryComponent implements OnInit {
             condition,
             pageNum: 1,
             pageSize: 10
-          }, res.params || {}),).then(result => {
+          }, res.params || {})).then(result => {
             if (result.data) {
               result.data.list.map(d => d.text = d.name.replace(/<\/?[^>]*>/g, ''));
               res.options = result.data.list;
@@ -96,7 +96,7 @@ export class QueryComponent implements OnInit {
       return res;
     });
   }
-  
+
   /* --------------- 重置 --------------- */
   _reset(): void {
     this._queryForm.reset();
@@ -144,24 +144,24 @@ export class QueryComponent implements OnInit {
 }
 
 export interface QueryNode {
-  label       : string;
-  key         : string;
-  type        : 'input' | 'select' | 'radio' | 'between' | 'datepicker' | 'rangepicker' | 'radio' | 'monthpicker' | 'tag' | 'search';
-  default?    : any;
-  valueKey?   : string[];
-  options?    : any[];
-  optionsUrl? : string;
-  searchUrl?  : string;
-  optionKey?  : OptionsKey;
-  ranges?     : Object;
+  label: string;
+  key: string;
+  type: 'input' | 'select' | 'radio' | 'between' | 'datepicker' | 'rangepicker' | 'radio' | 'monthpicker' | 'tag' | 'search';
+  default?: any;
+  valueKey?: string[];
+  options?: any[];
+  optionsUrl?: string;
+  searchUrl?: string;
+  optionKey?: OptionsKey;
+  ranges?: Object;
   placeholder?: string | string[];
-  isHide?     : boolean;
-  isRemove?   : boolean;
-  multiple?   : number;
-  isRadio?    : boolean;
+  isHide?: boolean;
+  isRemove?: boolean;
+  multiple?: number;
+  isRadio?: boolean;
   optionsHide?: boolean;
-  format?     : string;
-  hasOptionsHideBtn? : boolean;
+  format?: string;
+  hasOptionsHideBtn?: boolean;
   params?: any;
   readonly $subject?: Subject<string>;
 }

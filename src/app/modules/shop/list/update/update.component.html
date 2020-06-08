@@ -1,0 +1,78 @@
+<form nz-form [formGroup]="formGroup">
+    <div nz-row nzGutter="8">
+      <h3>当前批次报考人数：94/100</h3>
+        <nz-progress nzStrokeLinecap="round" nzType="circle" nzPercent="94"></nz-progress>
+
+    </div> 
+  <div nz-row nzGutter="8">
+      <div nz-col nzSpan="12">
+          <nz-form-item>
+              <nz-form-label nzRequired nzFor="className">姓名</nz-form-label>
+              <nz-form-control>
+                  <input nz-input placeholder="请输入姓名" formControlName="className" id="className">
+                  <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+              </nz-form-control>
+          </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+            <nz-form-label nzRequired nzFor="className">联系方式</nz-form-label>
+            <nz-form-control>
+                <input nz-input placeholder="请输入联系方式" formControlName="className" id="className">
+                <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+          <nz-form-label nzRequired nzFor="className">学历</nz-form-label>
+          <nz-form-control>
+              <input nz-input placeholder="请输入学历" formControlName="className" id="className">
+              <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+    <nz-form-item>
+        <nz-form-label nzRequired nzFor="className">专业</nz-form-label>
+        <nz-form-control>
+            <input nz-input placeholder="请输入专业" formControlName="className" id="className">
+            <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+</div>
+<div nz-col nzSpan="12">
+  <nz-form-item>
+      <nz-form-label nzRequired nzFor="className">身份证号</nz-form-label>
+      <nz-form-control>
+          <input nz-input placeholder="请输入身份证号" formControlName="className" id="className">
+          <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+      </nz-form-control>
+  </nz-form-item>
+</div>
+<div nz-col nzSpan="12">
+  <nz-form-item>
+      <nz-form-label nzRequired nzFor="className">报名项目</nz-form-label>
+      <nz-form-control>
+          <input nz-input placeholder="请输入报名项目" formControlName="className" id="className">
+        <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+      </nz-form-control>
+  </nz-form-item>
+</div>
+<div nz-col nzSpan="12">
+  <nz-form-item>
+      <nz-form-label nzRequired nzFor="className">考期</nz-form-label>
+      <nz-form-control>
+        <nz-date-picker formControlName="className" nzPlaceHolder="请选择考期" ></nz-date-picker>
+          <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+      </nz-form-control>
+  </nz-form-item>
+</div>
+  </div>
+</form>
+
+<div class="drawer-footer">
+  <button nz-button (click)="close()">取消</button>
+  <button nz-button nzType="primary" [nzLoading]="saveLoading" (click)="save()">查询</button>
+</div>
+

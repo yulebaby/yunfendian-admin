@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '',
     component: BaseComponent,
     children: [
+      
       {
         path: 'index',
         data: { title: '首页', noReuse: true },
@@ -50,79 +51,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'setting',
-        data: { noReuse: true },
-        children: [
-          {
-            path: 'list',
-            data: { title: '事件设置' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/list/list.module#ListModule'
-          },
-          {
-            path: 'notice',
-            data: { title: '公告设置' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/notice/notice.module#NoticeModule'
-          },
-
-          {
-            path: 'account',
-            data: { title: '账号管理' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/account/account.module#AccountModule'
-          },
-          {
-            path: 'role',
-            data: { title: '角色管理' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/role/role.module#RoleModule'
-          },
-          {
-            path: 'payment',
-            data: { noReuse: true },
-            children: [
-              {
-                path: 'pay',
-                data: { title: '在线充值' },
-                canLoad: [ AuthGuardService ],
-                loadChildren: 'src/app/modules/setting/payment/pay/pay.module#PayModule'
-              },
-              {
-                path: 'record',
-                data: { title: '充值记录' },
-                canLoad: [AuthGuardService],
-                loadChildren: 'src/app/modules/setting/payment/record/record.module#RecordModule'
-              }
-            ]
-          },
-          {
-            path: 'monitor',
-            data: { title: '监控管理' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/monitor/monitor.module#MonitorModule'
-          },
-          {
-            path: 'config',
-            data: { title: '基础设置' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/setting/config/config.module#ConfigModule'
-          },
-          {
-            path: 'class',
-            data: { title: '班级管理' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/class/class.module#ClassModule'
-          },
-          {
-            path: 'teacher',
-            data: { title: '老师管理' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/teacher/teacher.module#TeacherModule'
-          }
-        ]
-      },
-      {
         path: 'message',
         data: { noReuse: true },
         children: [
@@ -146,6 +74,19 @@ const routes: Routes = [
           },
         ]
       },
+      {
+        path: 'shop',
+        data: { noReuse: true },
+        children: [
+          {
+            path: 'list',
+            data: { title: '门店列表' },
+            canLoad: [ AuthGuardService ],
+            loadChildren: 'src/app/modules/shop/list/list.module#ListModule'
+          }
+        ]
+      },
+
       {
         path: 'event',
         data: { noReuse: true },
@@ -188,41 +129,7 @@ const routes: Routes = [
           },
         ]
       },
-      // {
-      //   path: 'analysis',
-      //   data: { title: '数据管理' },
-      //   canLoad: [AuthGuardService],
-      //   loadChildren: 'src/app/modules/analysis/analysis.module#AnalysisModule'
-      // },
-      {
-        path: 'analysis',
-        data: { noReuse: true },
-        children: [
-          {
-            path: 'management',
-            data: { title: '收入/退款分析' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/management/management.module#ManagementModule'          },
-          {
-            path: 'list',
-            data: { title: '全部学位' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/analysis/all/all.module#AllModule'
-          },
-          {
-            path: 'class',
-            data: { title: '班级学位' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/analysis/class/class.module#ClassModule'
-          },
-          {
-            path: 'teacher',
-            data: { title: '老师服务' },
-            canLoad: [AuthGuardService],
-            loadChildren: 'src/app/modules/analysis/teacher/teacher.module#TeacherModule'
-          },
-        ]
-      },
+
       {
         path: 'management',
         data: { title: '经营分析' },

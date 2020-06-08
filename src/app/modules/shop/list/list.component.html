@@ -1,0 +1,28 @@
+<div class="container">
+  <ea-query [node]="queryNode" (onSubmit)="EaTable.request($event)"></ea-query>
+
+  <div class="ea-button-group">
+    <button nz-button [nzType]="'primary'" style="margin-bottom: 16px;" (click)="addCustomer()">新增门店</button>
+    <button nz-button (click)="import()">开通VIP</button>
+    <button nz-button (click)="import()">重置绑定</button>
+  </div>
+
+  <ea-table #EaTable [thead]="tableNode" [EaTableTbodyTr]="EaTableTbodyTr" [allowSpace]="false" url="/shop/queryShopAccount">
+    <ng-template let-data #EaTableTbodyTr>
+      <td>{{ data.accountId }}</td>
+      <td><a (click)="preview({id: data.id, source: 'visit'})">{{ data.shopName }}</a></td>
+      <td>{{ data.shopShortName  }}</td>
+      <td>{{ data.city }}</td>
+      <td>{{ data.shopType }}</td>
+      <td>{{ data.createTime }}</td>
+      <td>{{ data.createTime }}</td>
+      <td>{{ data.expireDateStart || '--' }}</td>
+      <td>{{ data.leftDate || '--' }}</td>
+      <td>{{ data.fromName || '--' }}</td>
+      <td>{{ data.phone }}</td>
+      <td>{{ data.recruitTeacherName || '--' }}</td>
+      <td>{{ data.customerServiceId || '-' }}</td>
+
+    </ng-template>
+  </ea-table>
+</div>

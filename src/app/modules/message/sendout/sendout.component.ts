@@ -56,13 +56,13 @@ export class SendoutComponent implements OnInit {
 
   transferList: any[] = [];
 
-  smsBalanceSurplus: number = 1;
+  smsBalanceSurplus: number = 0;
 
   queryLoading: boolean;
 
   brandName: string;
 
-  watchContent: any[] = [];
+  watchContent: any[] = ['【初之光】 退订回T'];
 
   constructor(
     private http: HttpService,
@@ -71,8 +71,8 @@ export class SendoutComponent implements OnInit {
     private modal: NzModalService,
     private store: Store<AppState>
   ) {
-    this.http.post('/smsBalance/balance').then(res => this.smsBalanceSurplus = res.result);
-
+    this.http.post('/sms/balance').then(res => this.smsBalanceSurplus = res.data);
+    
     this.http.post('/smsTemplate/list', { paramJson: JSON.stringify({ "pageNum": 1, "pageSize": 1000 }) }).then(res => this.smsTemplateList = res.data.list);
     // this.http.post('/smsBalance/balance').then(res => this.smsBalance = res.result);
     this.http.post('/student/getStudentListQueryCondition').then(res => {
@@ -94,7 +94,7 @@ export class SendoutComponent implements OnInit {
     });
     this.formGroup.get('content').valueChanges.subscribe(val => {
       this.sendNum = this.selectList.length * (val && val.length + (this.brandName.length + 8) > 70 ? Math.ceil((val.length + (this.brandName.length + 8)) / 70) : 1);
-      let watchContent = `【初之光】${val},回复TD退订`;
+      let watchContent = `【初之光】${val} 退订回T`;
       this.watchContent = [];
       let con = watchContent.length / 70;
       let mocon = watchContent.length % 70;
@@ -141,6 +141,9 @@ export class SendoutComponent implements OnInit {
     } else {
       map.list.map((item, idx) => this.selectList.indexOf(item.mobilePhone) != -1 && this.selectList.splice(this.selectList.indexOf(item.mobilePhone), 1));
     }
+    let val = this.formGroup.value.content;
+    this.sendNum = this.selectList.length * (val && val.length + (this.brandName.length + 8) > 70 ? Math.ceil((val.length + (this.brandName.length + 8)) / 70) : 1);
+
   }
   sendout() {
     if (!this.selectList.length) {
@@ -166,10 +169,10 @@ export class SendoutComponent implements OnInit {
         this.formGroup.controls[control].markAsDirty();
         this.formGroup.controls[control].updateValueAndValidity();
       }
-    } else if (this.smsBalance - this.sendNum < 0) {
+    } else if (this.smsBalanceSurplus - this.sendNum < 0) {
       this.modal.confirm({
         nzTitle: '提示',
-        nzContent: `短信剩余条数不足，公司已为您垫付<b>${this.smsBalance - this.sendNum}</b>条短信费用！此次发送成功后，如不续购短信，则不可再次发送。`,
+        nzContent: `短信剩余条数不足，公司已为您垫付<b>${this.smsBalanceSurplus - this.sendNum}</b>条短信费用！此次发送成功后，如不续购短信，则不可再次发送。`,
         nzOnOk: () => this._sendSms()
       })
     } else {
@@ -180,7 +183,7 @@ export class SendoutComponent implements OnInit {
   _sendSms() {
     this.saveLoading = true;
     this.formGroup.patchValue({ mobilePhones: this.selectList.join(','), })
-    this.http.post('/smsSend/sendSmsToConsume', {
+    this.http.post('/sms/send', {
       paramJson: JSON.stringify(this.formGroup.value)
     }, true).then(res => {
       this.saveLoading = false;

@@ -22,10 +22,23 @@ export class UpdateComponent implements OnInit {
   isLoadingfile: boolean  = false;
   filesChange: any = () => { };
 
-  @Input() maxLength = 1;
-  
+  @Input() maxLength = 10;
+  files1: any[] = [{
+    uid: 1,
+    url: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4",
+    name: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4"
+  },{
+    uid: 2,
+    url: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4",
+    name: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4"
+  },{
+    uid: 3,
+    url: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4",
+    name: "http://mpv.videocc.net/ee54a08653/0/ee54a086539a3289d9b28a1f65ba2160_1.mp4"
+  }];
+  orderNumber: number = 1;
 
-  allowuploadNo = 1;
+  allowuploadNo = 5;
   private _files
   listCourseType: any[] = [];
   sourceList: any[] = [];
@@ -59,13 +72,18 @@ export class UpdateComponent implements OnInit {
     });
     this.formGroup.patchValue(this.info);
     if(this.info.vedio){
+    let videos = this.info.vedio.split(',');
     let arr = [];
-    arr.push({
-      uid: '1',
-      url: this.info.vedio,
-      name: this.info.vedio,
-      status: 'done'
-    });
+    videos.map((item,index) =>{
+      arr.push({
+        uid: index,
+        url: item,
+        name: item,
+        status: 'done'
+      });
+    })
+    
+  
     this.files = arr;
     }
   }
@@ -189,15 +207,23 @@ export class UpdateComponent implements OnInit {
                     vid: uploadInfo.fileData.vid
                   }).then(res => {
                     that.isLoadingfile = false;
-                    that.formGroup.patchValue({ vedio: res.data[0].mp4 })
-                    let arr = [];
-                    arr.push({
-                      uid: '1',
+                    let arr = {
+                      uid: that.orderNumber++,
                       url: res.data[0].mp4,
                       name: res.data[0].mp4,
                       status: 'done'
-                    });
-                    that.files = arr;
+                    };
+                    
+                    that.files = typeof(that.files) == 'object' ? that.files : [];
+                    that.files.push(arr);
+                    that.files = JSON.parse(JSON.stringify(that.files    ));
+                    let video = [];
+                    that.files.map(item =>{
+                      video.push(item.url);
+                    })
+                    that.formGroup.patchValue({ vedio: video.join(',') });
+
+                    console.log(that.files);
                   });
                 },5000);
             }
@@ -207,10 +233,19 @@ export class UpdateComponent implements OnInit {
         videoUpload.startAll();
     })
   }
-  deleteVideo = () =>{
-    setTimeout(_ => {
-      this.files = [];
-      this.formGroup.patchValue({ vedio: null })
+  deleteVideo = res =>{
+      setTimeout(_ => {
+        this.files.map((item,index)=>{
+           if(item.uid == res.uid){
+              this.files.splice(index,1);
+           }
+        })
+        this.files = JSON.parse(JSON.stringify(this.files));
+        let video = [];
+        this.files.map(item =>{
+          video.push(item.url);
+        })
+        this.formGroup.patchValue({ vedio: video.join(',') });
     }, 0)
   }
 

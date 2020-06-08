@@ -103,7 +103,7 @@
     <nz-row [nzGutter]="8">
         <nz-form-label>教案</nz-form-label>
         <nz-form-control>
-            <ea-upload-file  [maxLength]="1" formControlName="lesson"  ></ea-upload-file> 
+            <ea-upload-file  [maxLength]="5" formControlName="lesson"  ></ea-upload-file> 
           </nz-form-control>
     </nz-row> 
     <nz-row [nzGutter]="8">
@@ -113,7 +113,7 @@
           [nzBeforeUpload]="beforeUpload" 
           [(nzFileList)]="files" 
           [nzRemove]="deleteVideo"
-          [nzShowButton]="files?.length < allowuploadNo">
+          >
           <button nz-button [nzLoading]="isLoadingfile">
             <i nz-icon type="upload"></i><span>点击上传文件</span>
           </button>
@@ -121,16 +121,13 @@
         </nz-form-control>
     </nz-row> 
     <nz-row [nzGutter]="8">
-        <nz-col [nzSpan]="12">
-          <nz-form-item>
-            <nz-form-label>视频教案链接地址</nz-form-label>
-            <nz-form-control>
-              <input nz-input formControlName="vedio" placeholder="请输入视频教案链接地址">
-              <nz-form-explain *ngIf="valid('vedio')">请输入视频教案链接地址</nz-form-explain>
-            </nz-form-control>
-          </nz-form-item>
-        </nz-col>
-      </nz-row>
+      <nz-form-label >视频教案链接地址 <span style="font-size:10px;color:red;">（多个链接请用英文逗号,隔开）</span> </nz-form-label>
+      <nz-form-control>
+          <textarea  nz-input placeholder="请输入视频教案链接地址" formControlName="vedio" [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+          <nz-form-explain *ngIf="valid('vedio')">请输入视频教案链接地址</nz-form-explain>
+        </nz-form-control>
+  </nz-row> 
+
   </form>
   
   <div class="drawer-footer">

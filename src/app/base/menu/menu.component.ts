@@ -30,7 +30,8 @@ export class MenuComponent implements OnInit {
     this.store.select('routerState').subscribe(res => this.routerState = res);
 
     this.store.select('userInfoState').subscribe(res => {
-      this.roleAllowPath = res.menuUrls;
+      // this.roleAllowPath = res.menuUrls;
+      this.roleAllowPath = '**';
     });
   }
 

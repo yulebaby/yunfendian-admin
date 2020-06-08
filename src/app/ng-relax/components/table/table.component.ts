@@ -13,6 +13,7 @@ export class TableComponent implements OnInit {
   @Input() thead        : any[] = [];
 
   @Input() url          : string;
+  @Input() isType       : string = 'post';
 
   @Input() title        : string | TemplateRef<any>;
 
@@ -146,6 +147,7 @@ export class TableComponent implements OnInit {
     }, err => {
       this._pageInfo.loading = false;
     });
+    
   } 
 
 

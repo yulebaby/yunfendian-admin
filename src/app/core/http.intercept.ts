@@ -23,7 +23,7 @@ export class NoopInterceptor implements HttpInterceptor {
     if (req.url.substr(0, 4) !== 'http') {
       req = req.clone({
         url: environment.domain + req.url,
-        setHeaders: { token: token || '' }
+        setHeaders: { 'Content-Type': 'application/json;charset=utf-8' || '' }
       });
     }
     return next.handle(req).pipe(

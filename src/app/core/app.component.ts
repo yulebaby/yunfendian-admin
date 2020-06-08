@@ -17,13 +17,13 @@ export class AppComponent {
     private store: Store<AppState>
   ) {
 
-    try {
-      let userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
-      if (!userInfo.token) throw "未登录";
-      this.store.dispatch({ type: 'setUserInfo', payload: userInfo });
-    } catch (e) {
-      this.router.navigateByUrl('/login');
-    }
+    // try {
+    //   let userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    //   if (!userInfo.token) throw "未登录";
+    //   this.store.dispatch({ type: 'setUserInfo', payload: userInfo });
+    // } catch (e) {
+    //   this.router.navigateByUrl('/login');
+    // }
 
      /* ---------- 监听路由变化, 获取登录来源页, 去往页面， 当前页 ---------- */
     this.router.events.subscribe(event => {

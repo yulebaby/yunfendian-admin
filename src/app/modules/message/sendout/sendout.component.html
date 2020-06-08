@@ -17,7 +17,7 @@
             <nz-input-group [nzSuffix]="suffixTemplate">
               <textarea nz-input placeholder="请输入短信内容" formControlName="content" id="content" [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
             </nz-input-group>
-            <nz-form-text>回复TD退订</nz-form-text>
+            <nz-form-text>退订回T</nz-form-text>
             <ng-template #suffixTemplate >
               <div style="padding-top:60px;">
               <span [style.color]="formGroup.get('content').value && formGroup.get('content').value.length > (70 - (brandName.length + 8)) ? '#f5222d' : ''">
@@ -52,16 +52,17 @@
         (nzChange)="change($event)"
         [nzRender]="render">
         <ng-template #render let-item>
-          {{ item.nickName || '--'}}
+          <div class="list">
+          <span>{{ item.nickName || '--'}}</span>
           <nz-divider nzType="vertical"></nz-divider>
-          {{ item.studentName || '暂无' }}
+          <span>{{ item.studentName || '暂无' }}</span>
           <nz-divider nzType="vertical"></nz-divider>
-          {{ item.mobilePhone }}
+          <span>{{ item.mobilePhone }}</span>
           <nz-divider nzType="vertical"></nz-divider>
-          {{ item.memberFromName || '--' }}
+          <span>{{ item.memberFromName || '--' }}</span>
           <nz-divider nzType="vertical"></nz-divider>
-          {{ item.className || '--' }}
-  
+          <span>{{ item.className || '--' }}</span>
+        </div>
         </ng-template>
       </nz-transfer>
     </div>
@@ -84,18 +85,18 @@
     </div>
     <div class="header">
         <div style="line-height: 40px; overflow: hidden;">
-        <span style="margin-left:70px;">目前短信剩余条数：</span>
+        <span style="margin-left:60px; font-size: 14px;">目前短信剩余条数：</span>
         <span style="font-size: 24px; margin-right: 12px; ">{{ smsBalanceSurplus }}</span>
-        <button style="margin-top:8px;" nz-button nzType="primary" nzSize="small" routerLink="/home/configuration/payment/pay">去购买</button>
+        <button style="margin-top:8px;" nz-button nzType="primary" nzSize="small" routerLink="/home/configuration/payment/pay">立即购买</button>
         </div>
       </div>
         <div class="sms-mode">
             <div><span>本次发送号码数：</span><span [style.color]="'#f5222d'">{{ selectList.length }}</span>个</div>
             <div><span>本次消耗短信条数：</span><span [style.color]="'#f5222d'">{{ sendNum }}</span>条</div>
-            <div><span>本次发送后剩余：</span><span [style.color]="'#f5222d'">{{ smsBalance - sendNum }}</span>条</div>
+            <div><span>本次发送后剩余：</span><span [style.color]="'#f5222d'">{{ smsBalanceSurplus - sendNum }}</span>条</div>
         </div>
         <div class="bottomBtn">
-            <button   nz-button (click)="sendout()" nzType="primary">确认发送</button>
+            <button   nz-button (click)="sendout()" nzType="primary">确认发送短信</button>
         </div>
 </div>
 </div>
