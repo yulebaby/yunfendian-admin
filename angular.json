@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ylbb-system-kindergarten": {
+    "ylbb-system-yunfendian": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -36,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ylbb-system-kindergarten",
+            "outputPath": "dist/ylbb-system-yunfendian",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -116,18 +116,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ylbb-system-kindergarten:build"
+            "browserTarget": "ylbb-system-yunfendian:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ylbb-system-kindergarten:build:production"
+              "browserTarget": "ylbb-system-yunfendian:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ylbb-system-kindergarten:build"
+            "browserTarget": "ylbb-system-yunfendian:build"
           }
         },
         "test": {
@@ -161,7 +161,7 @@
         }
       }
     },
-    "ylbb-system-kindergarten-e2e": {
+    "ylbb-system-yunfendian-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -170,11 +170,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ylbb-system-kindergarten:serve"
+            "devServerTarget": "ylbb-system-yunfendian:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ylbb-system-kindergarten:serve:production"
+              "devServerTarget": "ylbb-system-yunfendian:serve:production"
             }
           }
         },
@@ -190,5 +190,5 @@
       }
     }
   },
-  "defaultProject": "ylbb-system-kindergarten"
+  "defaultProject": "ylbb-system-yunfendian"
 }
