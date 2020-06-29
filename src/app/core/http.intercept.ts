@@ -17,13 +17,12 @@ export class NoopInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     /* ----------- 如不是完整URL路径则拼接开发环境配置的主域名 ----------- */
     var token: string;
-    try {
-      token = JSON.parse(localStorage.getItem('userInfo')).token;
-    } catch (error) { console.warn('未登录') }
+    // try {
+    //   token = JSON.parse(localStorage.getItem('userInfo')).token;
+    // } catch (error) { console.warn('未登录') }
     if (req.url.substr(0, 4) !== 'http') {
       req = req.clone({
         url: environment.domain + req.url,
-        setHeaders: { 'Content-Type': 'application/json;charset=utf-8' || '' }
       });
     }
     return next.handle(req).pipe(

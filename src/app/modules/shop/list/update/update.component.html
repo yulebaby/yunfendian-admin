@@ -1,78 +1,93 @@
 <form nz-form [formGroup]="formGroup">
-    <div nz-row nzGutter="8">
-      <h3>当前批次报考人数：94/100</h3>
-        <nz-progress nzStrokeLinecap="round" nzType="circle" nzPercent="94"></nz-progress>
-
-    </div> 
   <div nz-row nzGutter="8">
       <div nz-col nzSpan="12">
           <nz-form-item>
-              <nz-form-label nzRequired nzFor="className">姓名</nz-form-label>
+              <nz-form-label nzRequired>店主手机号</nz-form-label>
               <nz-form-control>
-                  <input nz-input placeholder="请输入姓名" formControlName="className" id="className">
-                  <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+                  <input nz-input placeholder="请输入店主手机号" formControlName="phone" >
+                  <nz-form-explain *ngIf="formGroup.get('phone').dirty && formGroup.get('phone').hasError('required')">请输入店主手机号！</nz-form-explain>
+                  <nz-form-explain *ngIf="formGroup.get('phone').dirty && formGroup.get('phone').hasError('pattern')">请输入正确的手机号码！</nz-form-explain>
               </nz-form-control>
           </nz-form-item>
       </div>
       <div nz-col nzSpan="12">
         <nz-form-item>
-            <nz-form-label nzRequired nzFor="className">联系方式</nz-form-label>
+            <nz-form-label  nzFor="shopName">门店全称</nz-form-label>
             <nz-form-control>
-                <input nz-input placeholder="请输入联系方式" formControlName="className" id="className">
-                <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+                <input nz-input placeholder="请输入门店全称" formControlName="shopName">
+                <nz-form-explain *ngIf="formGroup.get('shopName').dirty && formGroup.get('shopName').hasError('required')">请输入门店全称！</nz-form-explain>
             </nz-form-control>
         </nz-form-item>
     </div>
     <div nz-col nzSpan="12">
       <nz-form-item>
-          <nz-form-label nzRequired nzFor="className">学历</nz-form-label>
+          <nz-form-label  nzFor="shopShortName">门店简称</nz-form-label>
           <nz-form-control>
-              <input nz-input placeholder="请输入学历" formControlName="className" id="className">
-              <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
+              <input nz-input placeholder="请输入门店简称" formControlName="shopShortName">
+              <nz-form-explain *ngIf="formGroup.get('shopShortName').dirty && formGroup.get('shopShortName').hasError('required')">请输入门店简称！</nz-form-explain>
           </nz-form-control>
       </nz-form-item>
   </div>
   <div nz-col nzSpan="12">
-    <nz-form-item>
-        <nz-form-label nzRequired nzFor="className">专业</nz-form-label>
-        <nz-form-control>
-            <input nz-input placeholder="请输入专业" formControlName="className" id="className">
-            <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
-</div>
-<div nz-col nzSpan="12">
-  <nz-form-item>
-      <nz-form-label nzRequired nzFor="className">身份证号</nz-form-label>
-      <nz-form-control>
-          <input nz-input placeholder="请输入身份证号" formControlName="className" id="className">
-          <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
-      </nz-form-control>
-  </nz-form-item>
-</div>
-<div nz-col nzSpan="12">
-  <nz-form-item>
-      <nz-form-label nzRequired nzFor="className">报名项目</nz-form-label>
-      <nz-form-control>
-          <input nz-input placeholder="请输入报名项目" formControlName="className" id="className">
-        <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
-      </nz-form-control>
-  </nz-form-item>
-</div>
-<div nz-col nzSpan="12">
-  <nz-form-item>
-      <nz-form-label nzRequired nzFor="className">考期</nz-form-label>
-      <nz-form-control>
-        <nz-date-picker formControlName="className" nzPlaceHolder="请选择考期" ></nz-date-picker>
-          <nz-form-explain *ngIf="formGroup.get('className').dirty && formGroup.get('className').hasError('required')">请输入名称！</nz-form-explain>
-      </nz-form-control>
-  </nz-form-item>
-</div>
+      <nz-form-item>
+          <nz-form-label>门店图片</nz-form-label>
+          <nz-form-control>
+              <ea-upload-picture formControlName="shopImg" [maxLength]="1"></ea-upload-picture>
+          </nz-form-control>
+      </nz-form-item>
   </div>
+  <div nz-col nzSpan="12">
+      <nz-form-item>
+          <nz-form-label >门店分类</nz-form-label>
+          <nz-form-control>
+              <nz-select formControlName="shopType" nzPlaceHolder="请选择门店分类">
+                  <nz-option [nzLabel]="option.text" [nzValue]="option.id" *ngFor="let option of shopTypeList"></nz-option>
+                </nz-select>
+              
+              <nz-form-explain *ngIf="formGroup.get('shopType').dirty && formGroup.get('shopType').hasError('required')">请选择门店分类！</nz-form-explain>
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+      <nz-form-item>
+          <nz-form-label  nzFor="wxNumber">加粉微信号</nz-form-label>
+          <nz-form-control>
+              <input nz-input placeholder="请输入加粉微信号" formControlName="wxNumber">
+              <nz-form-explain *ngIf="formGroup.get('wxNumber').dirty && formGroup.get('wxNumber').hasError('required')">请输入加粉微信号！</nz-form-explain>
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+      <nz-form-item>
+          <nz-form-label>加粉二维码</nz-form-label>
+          <nz-form-control>
+              <ea-upload-picture formControlName="wxQr" [maxLength]="1"></ea-upload-picture>
+          </nz-form-control>
+      </nz-form-item>
+  </div>
+
+  </div>
+      <nz-form-item>
+        <nz-form-label nzFor="address">门店位置</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzCompact>
+            <nz-cascader [nzOptions]="addressOptions" formControlName="cascaderAddress" nzLabelProperty="name" nzValueProperty="name" nzPlaceHolder="请选择所在省市区" [nzLoadData]="addressLoadData"></nz-cascader>
+           <input nz-input (keyup.enter)="mapGeocoderSearch()" formControlName="address" placeholder="请输入详细位置" id="shopAddress" style="width: 260px;">
+            <input nz-input [value]="(formGroup.get('longitude').value || '') + '，' + (formGroup.get('latitude').value || '')" readonly placeholder="请选择门店位置" style="width: 200px;"> 
+          </nz-input-group>
+          <nz-form-explain 
+            *ngIf="(formGroup.get('cascaderAddress').dirty && formGroup.get('cascaderAddress').errors) ||
+                  (formGroup.get('address').dirty && formGroup.get('address').errors)"
+            >请选择门店所在省市区及输入详细地址</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-spin [nzSpinning]="mapReadLoading" nzTip='地图加载中...'>
+        <abm-map #map [options]="{}" (ready)="onReady($event)" style="height: 300px;"></abm-map>
+      </nz-spin>
 </form>
 
 <div class="drawer-footer">
   <button nz-button (click)="close()">取消</button>
-  <button nz-button nzType="primary" [nzLoading]="saveLoading" (click)="save()">查询</button>
+  <button nz-button nzType="primary" [nzLoading]="saveLoading" (click)="save()">保存</button>
 </div>
 

@@ -1,0 +1,79 @@
+<form nz-form [formGroup]="formGroup">
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label nzRequired>店铺全称</nz-form-label>
+                <nz-form-control>
+                    <input nz-input placeholder="店铺全称" readonly formControlName="shopName" >  
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+              <nz-form-label nzRequired>店主手机</nz-form-label>
+              <nz-form-control>
+                  <input nz-input placeholder="请输入店主手机" readonly formControlName="phone">
+              </nz-form-control>
+          </nz-form-item>
+      </div>
+
+    <div nz-col nzSpan="12">
+        <nz-form-item>
+            <nz-form-label nzRequired>套餐类型</nz-form-label>
+            <nz-form-control>
+                <nz-select formControlName="salePlanId" nzPlaceHolder="请选择套餐类型">
+                    <nz-option [nzLabel]="option.name" [nzValue]="option.id" *ngFor="let option of salePlanList"></nz-option>
+                  </nz-select>
+                <nz-form-explain *ngIf="formGroup.get('salePlanId').dirty && formGroup.get('salePlanId').hasError('required')">请选择套餐类型！</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+        <nz-form-item>
+            <nz-form-label nzRequired >单价</nz-form-label>
+            <nz-form-control>
+                <input nz-input placeholder="请输入单价" readonly formControlName="planFee">
+                <nz-form-explain *ngIf="formGroup.get('planFee').dirty && formGroup.get('planFee').hasError('required')">请输入单价！</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+        <nz-form-item>
+            <nz-form-label nzRequired >实收</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzSuffix="元">
+                  <input nz-input type="number" placeholder="请输入实收" formControlName="actualFee">
+                </nz-input-group>
+                <nz-form-explain *ngIf="formGroup.get('actualFee').dirty && formGroup.get('actualFee').hasError('required')">请输入实收！</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </div> 
+    <div nz-col nzSpan="12">
+        <nz-form-item>
+            <nz-form-label nzRequired >赠送天数</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzSuffix="天">
+                  <input nz-input type="number" placeholder="请输入赠送天数" formControlName="freePeriod">
+                </nz-input-group>
+                <nz-form-explain *ngIf="formGroup.get('freePeriod').dirty && formGroup.get('freePeriod').hasError('required')">请输入赠送天数！</nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </div> 
+    </div>
+    <div nz-row nzGutter="8">
+            <nz-form-item>
+                <nz-form-label nzRequired>备注</nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input placeholder="请输入备注" formControlName="comment" [nzAutosize]="{ minRows: 3, maxRows: 5 }"> </textarea>
+                    <nz-form-explain *ngIf="formGroup.get('comment').dirty && formGroup.get('comment').hasError('required')" >请输入备注！</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+  </form>
+  
+  <div class="drawer-footer">
+    <button nz-button (click)="close()">取消</button>
+    <button nz-button nzType="primary" [nzLoading]="saveLoading" (click)="save()">保存</button>
+  </div>
+  
+  

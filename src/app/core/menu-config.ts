@@ -9,6 +9,11 @@ export const MenuConfig = [
         title : '门店列表',
         key   : '/home/shop/list',
         isLeaf: true
+      },
+      {
+        title : '购买列表',
+        key   : '/home/shop/purchase',
+        isLeaf: true
       }
     ]
   },

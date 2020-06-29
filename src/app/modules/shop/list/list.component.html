@@ -1,27 +1,33 @@
 <div class="container">
-  <ea-query [node]="queryNode" (onSubmit)="EaTable.request($event)"></ea-query>
-
-  <div class="ea-button-group">
+    <ea-query #query [node]="queryNode" (onSubmit)="table.request($event)"></ea-query>
+    <div class="ea-button-group">
     <button nz-button [nzType]="'primary'" style="margin-bottom: 16px;" (click)="addCustomer()">新增门店</button>
-    <button nz-button (click)="import()">开通VIP</button>
-    <button nz-button (click)="import()">重置绑定</button>
+    <button nz-button (click)="openVip()">开通VIP</button>
+    <button nz-button>重置绑定</button>
   </div>
-
-  <ea-table #EaTable [thead]="tableNode" [EaTableTbodyTr]="EaTableTbodyTr" [allowSpace]="false" url="/shop/queryShopAccount">
+  <ea-table #table 
+  url="/shop/queryShopAccount"
+  [checkedItems]="checkedItems"
+  [thead]="tableNode" 
+  [isRadio]="true"
+  (checkedItemsChange)="checkedData = $event"
+  [EaTableTbodyTr]="EaTableTbodyTr" 
+  checkedKey="accountId"
+  [checked]="true">
     <ng-template let-data #EaTableTbodyTr>
       <td>{{ data.accountId }}</td>
-      <td><a (click)="preview({id: data.id, source: 'visit'})">{{ data.shopName }}</a></td>
+      <td><a (click)="addCustomer(data)">{{ data.shopName }}</a></td>
       <td>{{ data.shopShortName  }}</td>
       <td>{{ data.city }}</td>
-      <td>{{ data.shopType }}</td>
-      <td>{{ data.createTime }}</td>
-      <td>{{ data.createTime }}</td>
-      <td>{{ data.expireDateStart || '--' }}</td>
-      <td>{{ data.leftDate || '--' }}</td>
-      <td>{{ data.fromName || '--' }}</td>
+      <td>{{ data.shopType == 1 ? '线下零售' :  data.shopType == 2 ? '餐饮' :  data.shopType == 3 ? '居民生活/商业服务' :  data.shopType == 4 ? '休闲娱乐' :  data.shopType == 5 ? '教育/医疗' : '其它' }}</td>
+      <td>{{ data.createTime | date:'yyyy-MM-dd' }}</td>
+      <td>{{ data.planName }}</td>
+      <td>{{ data.expireDate | date:'yyyy-MM-dd' }}</td>
+      <td>--</td>
+      <td>{{ data.nickName || '--' }}</td>
       <td>{{ data.phone }}</td>
-      <td>{{ data.recruitTeacherName || '--' }}</td>
-      <td>{{ data.customerServiceId || '-' }}</td>
+      <td>--</td>
+      <td>{{ data.csName || '-' }}</td>
 
     </ng-template>
   </ea-table>

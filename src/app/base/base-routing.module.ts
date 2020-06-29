@@ -83,7 +83,13 @@ const routes: Routes = [
             data: { title: '门店列表' },
             canLoad: [ AuthGuardService ],
             loadChildren: 'src/app/modules/shop/list/list.module#ListModule'
-          }
+          },
+          {
+            path: 'purchase',
+            data: { title: '购买列表' },
+            canLoad: [ AuthGuardService ],
+            loadChildren: 'src/app/modules/shop/purchase/purchase.module#PurchaseModule'
+          },          
         ]
       },
 

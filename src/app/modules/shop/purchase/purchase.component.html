@@ -1,0 +1,25 @@
+<div class="container">
+  <ea-query #query [node]="queryNode" (onSubmit)="table.request($event)"></ea-query>
+  <ea-table #table 
+  url="/shop/queryShopOrder"
+  [thead]="tableNode" 
+  [EaTableTbodyTr]="EaTableTbodyTr" 
+  >
+    <ng-template let-data #EaTableTbodyTr>
+      <td>{{ data.accountId }}</td>
+      <td>{{ data.shopName }}</td>
+      <td>{{ data.phone  }}</td>
+      <td>{{ data.planName }}</td>
+      <td>{{ data.planFee }}</td>
+      <td>{{ data.actualFee }}</td>
+      <td>{{ data.createTime }}</td>
+      <td>{{ data.expireDate }}</td>
+      <td>{{ data.actualPeriod - data.planPeriod  }}</td>
+      <td>{{ data.actualPeriod  }}</td>
+      <td>{{ data.payType == 1 ? '系统' : '--' }}</td>
+      <td>{{ data.operator  }}</td>
+      <td>{{ data.comment }}</td>
+ 
+    </ng-template>
+  </ea-table>
+</div> 

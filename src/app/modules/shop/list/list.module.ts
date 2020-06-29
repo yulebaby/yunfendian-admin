@@ -6,11 +6,11 @@ import { NgRelaxModule } from 'src/app/ng-relax/ng-relax.module';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ShopModule } from '../shop.module';
 import { UpdateComponent } from './update/update.component';
-
-
+import { AbmModule } from 'angular-baidu-maps';
+import { VipComponent } from './vip/vip.component';
 
 @NgModule({
-  declarations: [UpdateComponent, ListComponent],
+  declarations: [UpdateComponent, ListComponent, VipComponent],
   imports: [
     CommonModule,
     NgRelaxModule,
@@ -20,8 +20,11 @@ import { UpdateComponent } from './update/update.component';
       path: '',
       component: ListComponent
     }]),
+    AbmModule.forRoot({
+      apiKey: '7NCxWo3ADYmuEiFY8GM4SW9yxoNGSnLG'
+    })
   ],
-  entryComponents: [UpdateComponent],
+  entryComponents: [UpdateComponent,VipComponent],
   providers: [ DatePipe ]
 })
 export class ListModule { }

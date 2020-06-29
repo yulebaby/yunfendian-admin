@@ -21,6 +21,11 @@
               </nz-select>
             </ng-container>
 
+            <!-- 多级联动选择 -->
+            <ng-container *ngIf="control.type === 'cascader'">
+                <nz-cascader [nzOptions]="control.options" [formControlName]="control.key" nzLabelProperty="name" nzValueProperty="name" [nzPlaceHolder]="control.placeholder || '请选择' + control.label" [nzLoadData]="addressLoadData"></nz-cascader>
+              </ng-container>
+
             <ng-container *ngIf="control.type === 'search'">
               <nz-select
                 nzShowSearch
